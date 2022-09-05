@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="com.googlecode.catch-exception:catch-exception:1.2.0" type="repository">
+    <properties maven-id="com.googlecode.catch-exception:catch-exception:1.2.0" />
+    <CLASSES>
+      <root url="jar://$APPLICATION_HOME_DIR$/jbr/bin/$M2_REPO$/com/googlecode/catch-exception/catch-exception/1.2.0/catch-exception-1.2.0.jar!/" />
+      <root url="jar://$APPLICATION_HOME_DIR$/jbr/bin/$M2_REPO$/com/googlecode/catch-exception/catch-exception/1.2.0/mockito-core-1.9.5.jar!/" />
+      <root url="jar://$APPLICATION_HOME_DIR$/jbr/bin/$M2_REPO$/com/googlecode/catch-exception/catch-exception/1.2.0/hamcrest-core-1.1.jar!/" />
+      <root url="jar://$APPLICATION_HOME_DIR$/jbr/bin/$M2_REPO$/com/googlecode/catch-exception/catch-exception/1.2.0/objenesis-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
