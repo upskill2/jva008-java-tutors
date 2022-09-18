@@ -27,19 +27,22 @@ public class DeadlockTutor {
 		  this.balance = balance;
 	  }
 	  
-	  synchronized void withdraw(double amount){
+	   void withdraw(double amount){
 	     balance -= amount;
 	  } 
 
-	  synchronized void deposit(double amount){
+	   void deposit(double amount){
 	     balance += amount;
 	  } 
 	  
-	  synchronized void transfer(Account from, double amount) {
-		  // block the current account
-		  deposit(amount);
-		  // block the account, from which transfer is done
-		  from.withdraw(amount);
+	   void transfer(Account from, double amount) {
+		  synchronized (DeadlockTutor.this){
+
+			  // block the current account
+			  deposit(amount);
+			  // block the account, from which transfer is done
+			  from.withdraw(amount);
+		  }
 	  }
 	}
 

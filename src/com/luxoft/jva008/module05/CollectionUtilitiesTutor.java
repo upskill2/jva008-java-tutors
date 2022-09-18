@@ -75,7 +75,7 @@ public class CollectionUtilitiesTutor {
 		print(list);
 		
 		log("== indexOfSubList: look for sublist in the list ");
-		List<String> subList = Arrays.asList(new String[]{list.get(5),list.get(6)});
+		List<String> subList = Arrays.asList(list.get(5),list.get(6));
 		print(subList);
 		log("sublist position: " + Collections.indexOfSubList(list, subList));
 		

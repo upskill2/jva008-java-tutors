@@ -44,12 +44,12 @@ public class LinkedOrArrayListTutor {
 		nextTimeLog("linkedList add()");
 
 		for (int i=0; i<100000; i++) {
-			arrayList.get(1000);
+			arrayList.get(50000);
 		}
 		nextTimeLog("arrayList get()");
 		
 		for (int i=0; i<100000; i++) {
-			linkedList.get(1000);
+			linkedList.get(50000);
 		}
 		nextTimeLog("linkedList get()");
 

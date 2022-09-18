@@ -1,6 +1,7 @@
 package com.luxoft.jva008.module09;
 
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class PredicateTutor {
@@ -20,6 +21,13 @@ public class PredicateTutor {
         
         Predicate<String> p2 = Predicate.isEqual("two");
         Predicate<String> p3 = Predicate.isEqual("three");
+
+        Predicate<String> pFinal = p1.and(p2).or(p3);
+
+        stream.filter(p1.and(p2).or(p3)).forEach(s-> System.out.println(s));
+
+      //  Stream res = stream.filter(pFinal.negate());
+      //  System.out.println(res.collect(Collectors.toList()));
         
     }
 }

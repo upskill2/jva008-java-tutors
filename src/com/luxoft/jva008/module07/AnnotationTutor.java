@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 import org.junit.Test;
 
 public class AnnotationTutor {
-	final static String introspectClass = "com.luxoft.jva008.module06.ExampleClass";
+	final static String introspectClass = "com.luxoft.jva008.module07.ExampleClass";
 
 	@Test
 	public void testAnnotations()  throws ClassNotFoundException, NoSuchMethodException {
@@ -76,7 +76,9 @@ public class AnnotationTutor {
 				if (annotations.length > 0) { 
 					for (int i = 0; i<annotations.length; i++){
 						if (annotations[i] instanceof Default) { 
-							Default myAnnotation = (Default)annotations[0]; 
+							Default myAnnotation = (Default)annotations[0];
+							System.out.println("Name: " + myAnnotation.name() );
+							System.out.println("Value: " + myAnnotation.value() );
 							return myAnnotation.value(); 
 						}
 					}

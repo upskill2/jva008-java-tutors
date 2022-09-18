@@ -3,8 +3,11 @@ package com.luxoft.jva008.module02;
 import static com.luxoft.jva008.Logger.log;
 import static org.junit.Assert.assertEquals;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Formatter;
 
 import org.junit.Test;
 
@@ -15,7 +18,13 @@ public class FormatDateTutor {
 	 * Use Formatter
 	 */
 	public String getDateByFormatter(Date date) {
-		return null;
+
+		Formatter f = new Formatter();
+
+		String res = String.valueOf(f.format("%td.%tm.%ty", date, date, date));
+
+
+		return res;
 	}
 
 	/**
@@ -23,7 +32,12 @@ public class FormatDateTutor {
 	 * Use Formatter
 	 */
 	public String getDateString(Date date) {
-		return null;
+
+		Formatter f = new Formatter();
+
+	String res = String.valueOf(f.format("%td of %tB, %tY",date, date, date));
+
+		return res;
 	}
 	
 	/**
@@ -31,7 +45,10 @@ public class FormatDateTutor {
 	 * Use SimpleDateFormat
 	 */
 	public String getDateBySimpleDateFormat(Date date) {
-		return null;
+
+		SimpleDateFormat simpleFormat = new SimpleDateFormat("dd.MM.yy");
+
+		return simpleFormat.format(date);
 	}
 	
 	/**
@@ -39,7 +56,20 @@ public class FormatDateTutor {
 	 * Use SimpleDateFormat, method parse()
 	 */
 	public Date parseDDMMYY(String s) {
-		return null;
+
+		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy");
+
+		Date d = null;
+
+		try{
+			d=format.parse(s);
+		}
+		catch (ParseException e){
+			e.printStackTrace();
+		}
+
+
+		return d;
 	}
 	
 	@Test
@@ -54,7 +84,7 @@ public class FormatDateTutor {
 		
 		String dateBySimpleDateFormat = getDateBySimpleDateFormat(date);
 		log("dateBySimpleDateFormat: " + dateBySimpleDateFormat);
-		assertEquals(dateBySimpleDateFormat, "01.05.13");
+		assertEquals(dateBySimpleDateFormat, "01.05.13"); //this
 
 		System.out.println(getDateString(new Date()));
 	}

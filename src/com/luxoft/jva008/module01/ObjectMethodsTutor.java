@@ -152,10 +152,12 @@ public class ObjectMethodsTutor {
             super(name, surname, age);
         }
 
-        public int hashCode() {
-            return this.name.hashCode();
+        @Override
+        public final int hashCode() {
+            return name.hashCode();
         }
 
+        @Override
         public boolean equals(Object obj) {
             if (obj instanceof Employee) {
                 Employee emp = (Employee) obj;
@@ -177,12 +179,7 @@ public class ObjectMethodsTutor {
 
         @Override
         public final int hashCode() {
-            int prime = 31;
-            if (name != null) {
-                prime = 31 * age + age;
-            }
-
-            return prime;
+            return getFullName().hashCode();
         }
 
         @Override
@@ -192,7 +189,7 @@ public class ObjectMethodsTutor {
             if (!(o instanceof ObjectEqualsTutor.Employee))
                 return false;
             ObjectEqualsTutor.Employee other = (ObjectEqualsTutor.Employee) o;
-            if (name != other.name) {
+            if (getFullName().equals(other.getFullName())) {
                 return false;
             }
 
@@ -207,13 +204,9 @@ public class ObjectMethodsTutor {
         }
 
         @Override
-        public final int hashCode() {
-            int prime = 31;
-            if (name != null) {
-                prime = 31 * age + age;
-            }
+        public int hashCode() {
 
-            return prime;
+            return this.age;
         }
 
         @Override
@@ -223,7 +216,7 @@ public class ObjectMethodsTutor {
             if (!(o instanceof ObjectEqualsTutor.Employee))
                 return false;
             ObjectEqualsTutor.Employee other = (ObjectEqualsTutor.Employee) o;
-            if (name != other.name) {
+            if (age != other.age) {
                 return false;
             }
 

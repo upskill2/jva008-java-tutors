@@ -3,6 +3,7 @@ package com.luxoft.jva008.module09;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class GroupingByTutor {
@@ -13,7 +14,9 @@ public class GroupingByTutor {
 		
 		// 1) Group locales by the country
 		// use stream.collect() method, and Collectors.groupingBy(Function) as a collector
-		Map<String, List<Locale>> countryToLocales = null;
+		Map<String, List<Locale>> countryToLocales = locales.collect(Collectors.groupingBy(Locale::getCountry));
+		System.out.println(countryToLocales);
+
 		
 		countryToLocales.forEach((k,v)->System.out.println(k+" = "+v));
 
@@ -21,8 +24,9 @@ public class GroupingByTutor {
 		// use stream.collect() method, and Collectors.groupingBy(Function, Collector) as a collector
 		// use Collectors.counting() as a collector for groupingBy()
 		locales = Stream.of(Locale.getAvailableLocales()); 
-		Map<String, Long> countryToLocaleCounts = null;
+		Map<String, Long> countryToLocaleCounts = locales.collect(Collectors.groupingBy(Locale::getCountry,Collectors.counting()));
 		countryToLocaleCounts.forEach((k,v)->System.out.println(k+" = "+v));
+		System.out.println(countryToLocaleCounts);
 		
 }
 			

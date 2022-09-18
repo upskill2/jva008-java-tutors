@@ -1,13 +1,11 @@
 package com.luxoft.jva008.module05;
 
+import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static com.luxoft.jva008.Logger.log;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import org.junit.Test;
 
@@ -45,11 +43,34 @@ public class CollectionRemoveTutor {
 	// Remove all entrances of word "Cow"
     public void unCow(List<String> list) {
 
+        for (Iterator<String> iterator = list.iterator(); iterator.hasNext();) {
+            String str = iterator.next();
+            if(str.equals("Cow")) {
+                iterator.remove();
+            }
+        }
+
+
+
+
     }
 
     // Remove all entrances having 3 letters
     public void un3Letterization(List<String> list) {
 
+        for (Iterator<String> iterator = list.iterator(); iterator.hasNext(); ) {
+            String str = iterator.next();
+            if (str.length() == 3) {
+                iterator.remove();
+            }
+        }
+
+        //TO DO
+/*        list.
+                stream()
+                .filter(i -> i.length()!=3)
+                .map(Object::toString)
+                .collect(toList());*/
     }
 
 

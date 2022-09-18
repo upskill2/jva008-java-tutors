@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 //import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.junit.Test;
@@ -40,7 +41,8 @@ public class SynchronizedListTutor1 {
 	
 	static String [] animals = { "Cow", "Goose", "Cat", "Dog", "Elephant", "Rabbit", "Snake", "Chicken", "Horse", "Human" };
 	List<String> randomAnimals = Collections.synchronizedList(new ArrayList<>());
-//	Object monitor = new Object(); s
+	CopyOnWriteArrayList<String> copyRandomAnimals = new CopyOnWriteArrayList<>(randomAnimals);
+	Object monitor = new Object();
 	
 	public String getRandomAnimal() {
 		int index = (int)(Math.random() * animals.length);
@@ -58,19 +60,35 @@ public class SynchronizedListTutor1 {
 		public void run() {
 			try {
     			for (int i=0; i<20; i++) {
-//    				synchronized(monitor) {
-	    				randomAnimals.add(getRandomAnimal());
-	    				print(randomAnimals);
+					//case 0. Made Sync
+//					synchronized (monitor) {
+						randomAnimals.add(getRandomAnimal());
+
+						//Case 0. Basic
+						//print(randomAnimals);
+
+						// Case 1. Use CopyOnWriteArrayList - it helps
+						//print(copyRandomAnimals);
+
+						//Case 2. Pass Collections.unmodifiableList() to method print() - does not help
+						//	print(Collections.unmodifiableList(randomAnimals));
+
+						//Case 3. Pass copy of ArrayList to print() method
+						//print(List.copyOf(randomAnimals));
+
+						//Case 4. Solve this problem by passing a copy of list to print()
+						print(new ArrayList<String>(randomAnimals));
 //    				}
-//    				 print(new ArrayList<String>(randomAnimals));
-    			}
+    				 print(new ArrayList<String>(randomAnimals));
+//					}
+				}
 		    } catch(Exception e) {
 		        err(e.getClass().getName());
 		    }
 		}
 	}
 	
-	public void print(Collection<?> c) {
+	 public void print(Collection<?> c) {
 		StringBuilder builder = new StringBuilder();
 		Iterator<?> iterator = c.iterator();
 		while(iterator.hasNext()) {

@@ -3,9 +3,8 @@ package com.luxoft.jva008.module05;
 import static com.luxoft.jva008.Logger.log;
 import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Stream;
 
 import org.junit.Test;
 
@@ -27,6 +26,11 @@ public class ComparableTutor {
         public String toString() {
             return name;
         }
+
+        public String getName() {
+            return name;
+        }
+
     }
 
     /**
@@ -34,7 +38,16 @@ public class ComparableTutor {
 	 * Use TreeSet for that and implement Comparable interface in Animal class.
      */
     public Set<Animal> getAnimalsOrderedByNameSet() {
-        return null;
+
+        Set<Animal> set = new TreeSet<>(new AnimalComp());
+
+        for (String an : animals) {
+            set.add(new Animal(an));
+
+        }
+
+
+        return set;
     }
 
     /**
@@ -44,8 +57,29 @@ public class ComparableTutor {
      *
      */
     public Set<Animal> getAnimalsOrderedByNameSetDesc() {
-        return null;
+
+        Set<Animal> set = new TreeSet<>(new Comparator<Animal>() {
+            @Override
+            public int compare(Animal o1, Animal o2) {
+                return o1.name.compareTo(o2.name) * -1;
+            }
+        });
+
+        for (String an : animals) {
+            set.add(new Animal(an));
+
+        }
+
+        return set;
     }
+
+    public class AnimalComp implements Comparator<Animal>{
+        public int compare(Animal o1, Animal o2) {
+            return o1.name.compareTo(o2.name);
+        }
+    }
+
+
 
     public String joinByCycle(Collection<?> c) {
         if (c == null) {

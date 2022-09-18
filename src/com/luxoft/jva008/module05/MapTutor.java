@@ -1,10 +1,6 @@
 package com.luxoft.jva008.module05;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 import org.junit.Test;
 
@@ -34,6 +30,10 @@ public class MapTutor {
 	 * "Snake" => 5
      */
     public void fillAnimalsLengthMap() {
+        for (String str: animals) {
+            animalsLengthMap.put(str,str.length());
+        }
+
     }
 
     /**
@@ -41,6 +41,13 @@ public class MapTutor {
 	 * by printing the key and value
      */
     public void printMap(Map<?,?> map) {
+
+        Iterator<? extends Map.Entry<?, ?>> entries = map.entrySet().iterator();
+
+        while(entries.hasNext()){
+            Map.Entry<?,?> entry = entries.next();
+            System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+        }
     }
 
     /**
@@ -52,6 +59,21 @@ public class MapTutor {
 	 * 6 => Rabbit
      */
     public void fillLengthAnimalsMap() {
+        for (String str: animals) {
+            int len = str.length();
+            if(!lengthAnimalsMap.containsKey(len)){
+                Set<String> set = new HashSet<>();
+                set.add(str);
+                lengthAnimalsMap.put(len,set);
+            } else {
+                    Set<String> tempSet = lengthAnimalsMap.get(len);
+                    tempSet.add(str);
+                    lengthAnimalsMap.put(len,tempSet);
+            }
+
+
+        }
+
     }
 
     /**
@@ -59,6 +81,11 @@ public class MapTutor {
 	 * by printing the key and list of values
      */
     public void printMapOfSets(Map<Integer,Set<String>> map) {
+
+        for (Map.Entry<Integer,Set<String>> entry: map.entrySet()){
+            System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+        }
+
     }
 
     @Test

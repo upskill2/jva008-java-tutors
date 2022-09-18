@@ -3,6 +3,7 @@ package com.luxoft.jva008.module02;
 import static org.junit.Assert.*;
 
 import java.util.Calendar;
+import java.util.Formatter;
 import java.util.Locale;
 
 import org.junit.Test;
@@ -13,7 +14,17 @@ public class FormatNumberTutor {
 	 * (2 decimal places, separated by the dot)
 	 */
 	public String formatNumber(double n) {
-		return null;
+
+        StringBuilder sb = new StringBuilder();
+        Formatter f = new Formatter(sb);
+
+    f.format("%3.2f",n);
+
+        String sf2=String.format("value is %3.2f",n);
+
+        String s = sb.toString();
+
+		return s;
 	}
 
 	public void formatNumber() {
@@ -47,5 +58,14 @@ public class FormatNumberTutor {
 		assertEquals("3.14", number);
 
 	}
+
+    @Test
+    public void testFormatNumber2() {
+        formatNumber();
+        String number = formatNumber(111.12165656);
+        System.out.println(number);
+        assertEquals("111.12", number);
+
+    }
 
 }

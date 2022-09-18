@@ -33,7 +33,7 @@ public class SynchronizedTutor1 {
 		@Override
 		public void run() {
 			for (int i=0; i<1000; i++) {
-				synchronized(counter) {
+				synchronized(monitor) {
 				   counter++;
 				   Thread.yield();
 				}

@@ -2,12 +2,7 @@ package com.luxoft.jva008.module04;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 import org.junit.Test;
 
@@ -35,6 +30,7 @@ public class CallableTutor {
 			int index = (int)(Math.random()*100)/10;
 
 			Thread.sleep(10);
+			System.out.println("thread is finished:" + allStrings [index]);
 			return allStrings[index];
 		}
 	}
@@ -46,24 +42,43 @@ public class CallableTutor {
 		ArrayList<Future<String>> results = new ArrayList<>();
 
 //		ExecutorService executorService = Executors.newSingleThreadExecutor();
-		ExecutorService executorService = Executors.newFixedThreadPool(3);
+		ExecutorService executorService = Executors.newFixedThreadPool(2);
 //		ExecutorService executorService = Executors.newCachedThreadPool();
 
 		for (int i=0; i<10; i++) {
 			results.add(executorService.submit(new StringGenerator()));
+
+
 		}
 		
 		StringBuilder resultStr = new StringBuilder();
+
+		int iteration =0;
 		for(Future<String> result: results){
+
 			try {
+				if(iteration>5){
+					result.cancel(false);
+				}
 				// The blocking get call
-				resultStr.append(result.get());
+				try{
+					resultStr.append(result.get());
+					System.out.println("canceling thread" + iteration + ", isDone =" + results.get(iteration).isDone());
+
+				} 	catch (CancellationException e){
+					e.printStackTrace();
+				}
+
+
 				resultStr.append(" ");
+
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} catch (ExecutionException e) {
 				e.printStackTrace();
 			}
+
+			iteration++;
 		}
 		System.out.println(resultStr);
 

@@ -7,8 +7,8 @@ import static com.luxoft.jva008.Logger.log;
 
 public class NumbersTutor {
 
-    Double d = 123d;
-    Integer i = 23545452;
+    public Double d = 123d;
+    public Integer i = 23545452;
 
     @Test
     public void testConvertNumbers() {

@@ -1,10 +1,6 @@
 package com.luxoft.jva008.module05;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import org.junit.Test;
 
@@ -35,7 +31,8 @@ public class CollectionTutor {
    * The method must return a Set with all the animals
    */
    public Set<String> getAnimalsSet() {
-       return null;
+
+       return new HashSet<>(getAnimalsList());
    }
 
    /**
@@ -44,7 +41,14 @@ public class CollectionTutor {
 	* separated by commas, using for cycle
    */
    public String joinByCycle(Collection<?> c) {
-       return null;
+        StringBuilder sb = new StringBuilder();
+
+       for (int i = 0; i < c.size(); i++) {
+
+           sb.append(c.size()-1==i ? 1+i : 1+i+",");
+       }
+
+       return sb.toString();
    }
 
    /**
@@ -53,7 +57,18 @@ public class CollectionTutor {
 	* separated by commas, using iterator
    */
    public String joinByIterator(Collection<?> c) {
-       return null;
+
+       StringBuilder sb = new StringBuilder();
+
+       Iterator<?> it =c.iterator();
+       while(it.hasNext()){
+           Object element = it.next();
+           sb.append(element+",");
+
+       }
+
+       sb.replace(sb.length()-1,sb.length(),"");
+       return sb.toString();
    }
 
    @Test

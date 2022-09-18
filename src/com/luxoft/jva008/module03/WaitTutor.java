@@ -35,6 +35,35 @@ public class WaitTutor {
 		@Override
 		public void run() {
 			for (int i=0; i<100; i++) {
+
+				synchronized(monitor) {
+					if (n==1) {
+						t1Counter = i;
+					}
+					if (n==2) {
+						t2Counter = i;
+					}
+
+					monitor.notify();
+					Thread.yield();
+					try {
+						if (n==1) {
+							if (i>t2Counter) {
+								log("t1 is ahead with i=" + i + ", wait for t2Counter = " + t2Counter);
+								monitor.wait();
+							}
+						}
+						if (n==2) {
+							if (i>t1Counter) {
+								log("t2 is ahead with i=" + i + ", wait for t1Counter = " + t1Counter);
+								monitor.wait();
+							}
+						}
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+				}
 				logAndCheckCounter(threadName, i);
 				Thread.yield();
 			}

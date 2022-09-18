@@ -2,10 +2,7 @@ package com.luxoft.jva008.module04;
 
 import static org.junit.Assert.assertFalse;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import org.junit.Test;
 
@@ -30,6 +27,7 @@ public class SynchronizedListTutor {
 	static String [] animals =
 	    { "Cow", "Goose", "Cat", "Dog", "Elephant", "Rabbit", "Snake", "Chicken", "Horse", "Human" };
 	List<String> randomAnimals = new ArrayList<>();
+	List<String> syncAnimals = Collections.synchronizedList(randomAnimals);
 	
 	public String getRandomAnimal() {
 		int index = (int)(Math.random() * animals.length);
@@ -47,7 +45,7 @@ public class SynchronizedListTutor {
 		public void run() {
 			try {
     			for (int i=0; i<50000; i++) {
-    				randomAnimals.add(getRandomAnimal());
+					syncAnimals.add(getRandomAnimal());
     			}
 		    } catch(Exception e) {
 		        err(e.getClass().getName());

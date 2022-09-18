@@ -20,7 +20,7 @@ public class LocalDateDemo {
 		timePoint.getSecond();
 		
 		// Set the value, returning a new object
-		LocalDateTime thePast = timePoint.withDayOfMonth(
+			LocalDateTime thePast = timePoint.withDayOfMonth(
 		    10).withYear(2010);
 
 		/* You can use direct manipulation methods, 

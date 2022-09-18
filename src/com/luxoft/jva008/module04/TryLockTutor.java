@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -39,13 +40,16 @@ public class TryLockTutor {
 		@Override
 		public void run() {
 			for (int i = 0; i < ITERATIONS; i++) {
-				lock.lock();
-				stringBuilder.append(threadName);
-				Thread.yield();
-				stringBuilder.append(threadName);
-				Thread.yield();
-				stringBuilder.append(",");
-				lock.unlock();
+				if(lock.tryLock()){
+
+
+					lock.lock();
+					stringBuilder.append(threadName);
+					Thread.yield();
+					stringBuilder.append(threadName);
+					Thread.yield();
+					stringBuilder.append(",");
+				}
 			}
 		}
 	}
@@ -62,13 +66,20 @@ public class TryLockTutor {
 		@Override
 		public void run() {
 			for (int i = 0; i < 5; i++) {
-			    lock.lock();
-				String s = stringBuilder.toString();
-				int len = s.length();
-				int l = len>50 ? len-50:0;
-				log(len + ":" + s.substring(l));
-				lock.unlock();
-				Thread.yield();
+				try {
+					if(lock.tryLock(10,TimeUnit.MILLISECONDS)){
+
+						lock.lock();
+						String s = stringBuilder.toString();
+						int len = s.length();
+						int l = len>50 ? len-50:0;
+						log(len + ":" + s.substring(l));
+						lock.unlock();
+						Thread.yield();
+					}
+				} catch (InterruptedException e) {
+					throw new RuntimeException(e);
+				}
 			}
 		}
 	}

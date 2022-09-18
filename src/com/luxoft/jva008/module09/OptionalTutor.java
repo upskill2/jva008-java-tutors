@@ -14,6 +14,8 @@ import java.util.Optional;
  */
 public class OptionalTutor {
 
+    final static int RESULT= 25;
+
     public static void main(String... args) {
         
         List<Integer> list = Arrays.asList();
@@ -22,6 +24,23 @@ public class OptionalTutor {
 	        list.stream()
 	                .reduce(Integer::max);
         System.out.println("max = " + opt);
-        
+
+
+        int task1 = opt.orElse(25);
+        System.out.println(task1);
+
+        try{
+
+            opt.orElseThrow(()->new NullPointerException("Is empty"));
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
+        int task3 = opt.orElseGet(OptionalTutor:: defaultMethod);
+        System.out.println("Task3 " + task3);
+
+    }
+    public static int defaultMethod(){
+        return 16;
     }
 }

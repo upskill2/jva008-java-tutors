@@ -16,7 +16,7 @@ public class ClassSpyTutor {
     
 	@Test
 	public void testClassSpy() {
-		ClassSpyTutor.spy("com.luxoft.jva008.module05.ExampleClass", ClassMember.ALL.toString());
+		ClassSpyTutor.spy("com.luxoft.jva008.module06.ExampleClass", ClassMember.ALL.toString());
 	}
 
     public static void spy(String... args) {
@@ -58,7 +58,7 @@ public class ClassSpyTutor {
     	}
     }
 
-    private static void printMembers(Member[] mbrs, String s) {
+    public static void printMembers(Member[] mbrs, String s) {
 		out.format("%s:%n", s);
 		
 		for (Member mbr : mbrs) {

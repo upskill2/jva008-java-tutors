@@ -73,7 +73,7 @@ public class ExecutorServiceTutor {
 			threads.add(new Thread(new TestThread("t"+i)));
 		}
 
-//		ExecutorService executorService = Executors.newSingleThreadExecutor();
+//	ExecutorService executorService = Executors.newSingleThreadExecutor();
 //		ExecutorService executorService = Executors.newFixedThreadPool(10);
 		ExecutorService executorService = Executors.newCachedThreadPool();
 		for (int i=0; i<10; i++) {
@@ -83,8 +83,8 @@ public class ExecutorServiceTutor {
 		
 		executorService.shutdown();
 		try {
-			executorService.awaitTermination(1, TimeUnit.SECONDS);
-//			executorService.awaitTermination(1, TimeUnit.MILLISECONDS);
+//			executorService.awaitTermination(1, TimeUnit.SECONDS);
+			executorService.awaitTermination(1, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

@@ -1,8 +1,10 @@
 package com.luxoft.jva008.module04;
 
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.junit.Assert.fail;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -80,8 +82,9 @@ public class LockTutor {
 	@Test
 	public void testThread() {
 		long start = new Date().getTime();
-		t1 = new Thread(new WritingThread("1", new ReentrantLock()));
-		t2 = new Thread(new WritingThread("2", new ReentrantLock()));
+		Lock lock = new ReentrantLock();
+		t1 = new Thread(new WritingThread("1", lock));
+		t2 = new Thread(new WritingThread("2", lock));
 		t3 = new Thread(new ReadingThread("3", new ReentrantLock()));
 		t1.start();
 		t2.start();

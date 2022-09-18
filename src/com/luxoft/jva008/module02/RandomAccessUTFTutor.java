@@ -2,10 +2,7 @@ package com.luxoft.jva008.module02;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +15,13 @@ public class RandomAccessUTFTutor {
     * Write to the file FILES_TEST_PATH 2 UTF lines:
     * "test line" and "test line 2"
     */
-	public void randomAccessWriteUTF() {
+	public void randomAccessWriteUTF() throws IOException {
+
+		RandomAccessFile file = new RandomAccessFile(FILES_TEST_PATH,"rw");
+
+		file.writeUTF("test line");
+		file.writeUTF("test line 2");
+
 	}
 	
 	/**
@@ -26,8 +29,15 @@ public class RandomAccessUTFTutor {
     * read and return its value
     * @return
 	*/
-	public String randomAccessReadUTF() {
-		return null;
+	public String randomAccessReadUTF() throws IOException {
+		RandomAccessFile file = new RandomAccessFile(FILES_TEST_PATH,"rw");
+
+		file.seek(13);
+
+		String res = file.readLine();
+
+
+		return res;
 	}
 	
 	@Before
@@ -42,7 +52,7 @@ public class RandomAccessUTFTutor {
 	}
 
 	@Test
-	public void testRandomAccessUTF() throws UnsupportedEncodingException  {
+	public void testRandomAccessUTF() throws IOException {
 		randomAccessWriteUTF();
 		String s1 = null, s2 = null;
 		try (RandomAccessFile f = new RandomAccessFile(FILES_TEST_PATH, "r")){

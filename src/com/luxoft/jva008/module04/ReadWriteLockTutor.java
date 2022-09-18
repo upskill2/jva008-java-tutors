@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.junit.Test;
 
@@ -90,11 +91,11 @@ public class ReadWriteLockTutor {
          * acquire different locks for ReadingThread and WritingThread
          * using lock.readLock() and lock.writeLock()
          */
-		ReentrantLock lock = new ReentrantLock();
-		t1 = new Thread(new WritingThread("1", lock));
-		t2 = new Thread(new WritingThread("2", lock));
-		t3 = new Thread(new ReadingThread("r1", lock));
-		t4 = new Thread(new ReadingThread("r2", lock));
+		ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+		t1 = new Thread(new WritingThread("1", lock.writeLock()));
+		t2 = new Thread(new WritingThread("2", lock.writeLock()));
+		t3 = new Thread(new ReadingThread("r1", lock.readLock()));
+		t4 = new Thread(new ReadingThread("r2", lock.readLock()));
 
 		System.out.println("Starting threads");
 		t1.start();
